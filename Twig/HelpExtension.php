@@ -30,7 +30,7 @@ class HelpExtension extends AbstractExtension
 
     public function displayTooltip(string $code)
     {
-        $message = $this->helpRepository->findBy(["code" => $code]) ?? "default message";
+        $message = $this->helpRepository->findOneBy(["code" => $code]) ?? "default message";
 
         return $message;
     }

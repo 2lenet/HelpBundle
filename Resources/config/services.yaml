@@ -4,9 +4,12 @@ services:
         public: false
         autoconfigure: true
 
+    help.help_repository:
+        class: Lle\HelpBundle\Repository\HelpRepository
+
     help.twig.help_extension:
         class: Lle\HelpBundle\Twig\HelpExtension
         arguments:
-            - "@help.help_repository"
+        - "@help.help_repository"
         tags:
-            - { name: twig.extension }
+        - { name: twig.extension }
