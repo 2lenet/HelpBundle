@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        public: false
+        autoconfigure: true
+
+    help.twig.help_extension:
+        class: Lle\HelpBundle\Twig\HelpExtension
+        arguments:
+            - "@help.help_repository"
+        tags:
+            - { name: twig.extension }
