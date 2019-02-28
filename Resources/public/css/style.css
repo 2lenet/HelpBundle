@@ -1,5 +1,5 @@
 .lleHelp-icon{
-    visibility: hidden;
+    display: none;
 }
 
 .lleHelp-icon:hover, .lleHelp-icon:focus{
