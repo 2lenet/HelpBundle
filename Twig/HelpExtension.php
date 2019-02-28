@@ -2,6 +2,7 @@
 
 namespace Lle\HelpBundle\Twig;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Lle\HelpBundle\Repository\HelpRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -34,6 +35,9 @@ class HelpExtension extends AbstractExtension
     {
         $message = $this->helpRepository->findOneBy(["code" => $code]);
 
+        if(!$message) {
+            throw new EntityNotFoundException("Entity Help with code ".$code." not found");
+        }
         return $twig->render('@LleHelp/help_icon.html.twig', ["message" => $message]);
     }
 
