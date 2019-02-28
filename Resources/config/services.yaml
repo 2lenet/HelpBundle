@@ -9,7 +9,7 @@ services:
 
     help.twig.help_extension:
         class: Lle\HelpBundle\Twig\HelpExtension
-        arguments:
-        - "@help.help_repository"
         tags:
-        - { name: twig.extension }
+            - { name: twig.extension }
+        arguments:
+            - "@help.help_repository"

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jules
- * Date: 27/02/19
- * Time: 15:24
- */
 
 namespace Lle\HelpBundle\Twig;
 
@@ -24,14 +18,27 @@ class HelpExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('lle_help', [$this, 'displayTooltip'])
+            new TwigFunction('lle_help',
+                [$this, 'addHelpIcon'],
+                ['needs_environment' => true,
+                    'is_safe' => ['html']]),
+
+            new TwigFunction('lle_help_show',
+                [$this, 'addShowHelpButton'],
+                ['needs_environment' => true,
+                    'is_safe' => ['html']])
         ];
     }
 
-    public function displayTooltip(string $code)
+    public function addHelpIcon(\Twig_Environment $twig, string $code)
     {
-        $message = $this->helpRepository->findOneBy(["code" => $code]) ?? "default message";
+        $message = $this->helpRepository->findOneBy(["code" => $code]);
 
-        return $message;
+        return $twig->render('@LleHelp/help_icon.html.twig', ["message" => $message]);
+    }
+
+    public function addShowHelpButton(\Twig_Environment $twig)
+    {
+        return $twig->render('@LleHelp/help_button.html.twig');
     }
 }
