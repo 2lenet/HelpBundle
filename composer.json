@@ -1,0 +1,24 @@
+{
+    "name": "2lenet/help-bundle",
+    "type": "symfony-bundle",
+    "description": "Helper",
+    "keywords": ["help"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saenger joris",
+            "email": "joris@2le.net"
+        },
+        {
+            "name": "VAN ASSCHE Jules",
+            "email": "jules@2le.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+    },
+    "autoload": {
+        "psr-4": { "Lle\\PdfGeneratorBundle\\": "src/" }
+    },
+    "minimum-stability": "dev"
+}
