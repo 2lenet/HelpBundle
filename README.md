@@ -1,3 +1,6 @@
+
+composer require 2lenet/help-bundle
+
 # HelpBundle
 
 This bundle provides help icons that display a custom message within a tooltip with 2 simple
