@@ -2,18 +2,21 @@
 
 namespace Lle\HelpBundle\Twig;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
-use Lle\HelpBundle\Repository\HelpRepository;
+use Lle\HelpBundle\Entity\Help;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class HelpExtension extends AbstractExtension
 {
     private $helpRepository;
+    private $em;
 
-    public function __construct(HelpRepository $helpRepo)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->helpRepository = $helpRepo;
+        $this->helpRepository = $em->getRepository(Help::class);
+        $this->em = $em;
     }
 
     public function getFunctions()
@@ -36,9 +39,18 @@ class HelpExtension extends AbstractExtension
         $message = $this->helpRepository->findOneBy(["code" => $code]);
 
         if(!$message) {
-            throw new EntityNotFoundException("Entity Help with code ".$code." not found");
+            $message = new Help();
+            $message->setCode($code);
+            $message->setActif(false);
+            $message->setMessage(null);
+            $this->em->persist($message);
+            $this->em->flush();
         }
-        return $twig->render('@LleHelp/help_icon.html.twig', ["message" => $message]);
+        if($message->getActif()) {
+            return $twig->render('@LleHelp/help_icon.html.twig', ["message" => $message]);
+        }else{
+            return null;
+        }
     }
 
     public function addShowHelpButton(\Twig_Environment $twig)

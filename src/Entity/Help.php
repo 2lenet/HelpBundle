@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="help")
- * @ORM\Entity(repositoryClass="Lle\HelpBundle\Repository\HelpRepository")
+ * @ORM\Entity()
  */
 class Help
 {
@@ -26,6 +26,11 @@ class Help
      * @ORM\Column(type="string", length=40, nullable=false)
      */
     private $code;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $actif = false;
 
     /**
      * @return mixed
@@ -69,7 +74,25 @@ class Help
 
     public function __toString()
     {
-        return $this->getMessage();
+        return $this->getMessage() ?? "";
     }
+
+    /**
+     * @return mixed
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param mixed $actif
+     */
+    public function setActif($actif): void
+    {
+        $this->actif = $actif;
+    }
+
+
 
 }
