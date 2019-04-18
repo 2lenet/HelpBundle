@@ -1,0 +1,28 @@
+.lleHelp-icon{
+    display: none;
+}
+
+.lleHelp-icon:hover, .lleHelp-icon:focus{
+    box-shadow:0 1px 0 rgba(255,255,255,.4);
+}
+
+.lleHelp-icon:hover span, .lleHelp-icon:focus span{
+    transform:scale(1) rotate(0);
+    opacity:1;
+}
+
+.lleHelp-icon span{
+    position:absolute;
+
+    margin-top:23px;
+    margin-left:-35px;
+
+    color: #fdfffd;
+    background: rgba(5, 6, 200, 0.9);
+    padding:15px;
+    border-radius:3px;
+    box-shadow:0 0 2px rgba(0,0,0,.5);
+    transform:scale(0) rotate(-12deg);
+    transition:all .25s;
+    opacity:0;
+}
